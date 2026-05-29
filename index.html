@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Star Tax Partners | State Tax Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  /* ───────────────── RESET & VARIABLES ───────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:   #0a0f1e;
+    --navy2:  #111827;
+    --navy3:  #1a2336;
+    --gold:   #c9a84c;
+    --gold2:  #e8c96a;
+    --gold3:  #f5dfa0;
+    --cream:  #f9f5ec;
+    --white:  #ffffff;
+    --gray:   #8a95a8;
+    --border: rgba(201,168,76,.25);
+    --shadow: 0 8px 40px rgba(0,0,0,.45);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ───────────────── GRAIN OVERLAY ───────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    opacity: .35;
+  }
+
+  /* ───────────────── NAVIGATION ───────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,15,30,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: .9rem;
+    text-decoration: none;
+  }
+  .nav-logo .star-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    flex-shrink: 0;
+  }
+  .nav-logo .brand {
+    display: flex; flex-direction: column; line-height: 1;
+  }
+  .nav-logo .brand-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--cream); letter-spacing: .04em;
+  }
+  .nav-logo .brand-sub {
+    font-size: .62rem; letter-spacing: .22em; color: var(--gold);
+    text-transform: uppercase; margin-top: .15rem;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: .78rem; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gray); transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--gold2); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: .55rem 1.4rem !important;
+    border-radius: 2px;
+    transition: background .25s, color .25s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--gold); display: block; transition: .3s; }
+
+  /* ───────────────── HERO ───────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    padding: 8rem 4rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,.04) 0%, transparent 60%),
+      linear-gradient(170deg, #0a0f1e 0%, #0d1525 50%, #0a0f1e 100%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(201,168,76,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
+  .hero-content {
+    position: relative; text-align: center; max-width: 860px;
+    animation: fadeUp .9s ease both;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px; background: var(--gold); opacity: .5;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.08;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--gold2); }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: var(--gray); max-width: 580px; margin: 0 auto 3rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--navy); border: none;
+    padding: .9rem 2.4rem; font-family: 'Raleway', sans-serif;
+    font-size: .8rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream); border: 1px solid rgba(201,168,76,.4);
+    padding: .9rem 2.4rem; font-family: 'Raleway', sans-serif;
+    font-size: .8rem; font-weight: 600; letter-spacing: .15em;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    transition: border-color .2s, color .2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold2); color: var(--gold2); }
+  .hero-stats {
+    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 4rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600; color: var(--gold2); display: block;
+  }
+  .stat-label {
+    font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray);
+  }
+
+  /* ───────────────── SECTIONS ───────────────── */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-size: .68rem; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 300; color: var(--white); line-height: 1.2;
+  }
+  h2 em { font-style: italic; color: var(--gold2); }
+
+  /* ───────────────── SERVICES ───────────────── */
+  #services { background: var(--navy2); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px; margin-top: 3.5rem;
+    border: 1.5px solid var(--border);
+  }
+  .service-card {
+    background: var(--navy3); padding: 2.8rem 2.4rem;
+    border: 1px solid transparent;
+    transition: background .3s, border-color .3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    transition: width .4s ease;
+  }
+  .service-card:hover::after { width: 100%; }
+  .service-card:hover { background: #1f2d45; border-color: var(--border); }
+  .service-icon {
+    width: 48px; height: 48px; margin-bottom: 1.5rem;
+    background: rgba(201,168,76,.1); border-radius: 4px;
+    display: grid; place-items: center;
+    color: var(--gold);
+  }
+  .service-icon svg { width: 24px; height: 24px; }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 600; color: var(--white);
+    margin-bottom: .8rem;
+  }
+  .service-card p { font-size: .88rem; line-height: 1.75; color: var(--gray); }
+
+  /* ───────────────── TEAM ───────────────── */
+  #team { background: var(--navy); }
+  .team-wrap { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 3.5rem; }
+  .team-card {
+    flex: 1; min-width: 280px; max-width: 460px;
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    padding: 3rem 2.8rem;
+    position: relative; overflow: hidden;
+    transition: transform .3s;
+  }
+  .team-card:hover { transform: translateY(-4px); }
+  .team-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+  }
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    display: grid; place-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600; color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+  .team-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 600; color: var(--white);
+  }
+  .team-role {
+    font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin: .4rem 0 1.2rem;
+  }
+  .team-card p { font-size: .88rem; line-height: 1.8; color: var(--gray); }
+  .team-divider {
+    width: 40px; height: 1px; background: var(--gold); opacity: .4; margin: 1.2rem 0;
+  }
+  .team-contact { font-size: .82rem; color: var(--gray); }
+  .team-contact a { color: var(--gold2); text-decoration: none; }
+  .team-contact a:hover { text-decoration: underline; }
+
+  /* ───────────────── CALENDAR / BOOKING ───────────────── */
+  #calendar { background: var(--navy2); }
+  .booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; align-items: start; }
+  .calendar-widget {
+    background: var(--navy3); border: 1px solid var(--border); padding: 2rem;
+  }
+  .cal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .cal-header h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--white);
+  }
+  .cal-nav { display: flex; gap: .5rem; }
+  .cal-nav button {
+    background: rgba(201,168,76,.1); border: 1px solid var(--border);
+    color: var(--gold); width: 32px; height: 32px;
+    cursor: pointer; font-size: 1rem; border-radius: 2px;
+    transition: background .2s;
+  }
+  .cal-nav button:hover { background: rgba(201,168,76,.2); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+  .cal-day-label {
+    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gray); padding: .4rem 0;
+  }
+  .cal-day {
+    aspect-ratio: 1; display: grid; place-items: center;
+    font-size: .82rem; color: var(--gray); border-radius: 2px;
+    cursor: pointer; transition: background .2s, color .2s;
+    border: 1px solid transparent;
+  }
+  .cal-day:hover:not(.empty):not(.past) { background: rgba(201,168,76,.15); color: var(--gold2); border-color: var(--border); }
+  .cal-day.today { background: rgba(201,168,76,.2); color: var(--gold2); border-color: var(--gold); font-weight: 600; }
+  .cal-day.selected { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .cal-day.past { opacity: .35; cursor: not-allowed; }
+  .cal-day.empty { cursor: default; }
+  .cal-day.has-slots::after { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin: 1px auto 0; }
+
+  .booking-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .booking-form h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--white); margin-bottom: .5rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: .45rem; }
+  .form-group label { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--navy3); border: 1px solid var(--border);
+    color: var(--cream); padding: .75rem 1rem;
+    font-family: 'Raleway', sans-serif; font-size: .88rem;
+    border-radius: 2px; outline: none;
+    transition: border-color .25s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group select option { background: var(--navy2); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin-top: .3rem; }
+  .time-slot {
+    background: var(--navy3); border: 1px solid var(--border);
+    color: var(--gray); padding: .5rem; text-align: center;
+    font-size: .78rem; cursor: pointer; border-radius: 2px;
+    transition: all .2s;
+  }
+  .time-slot:hover, .time-slot.active {
+    background: rgba(201,168,76,.15); border-color: var(--gold); color: var(--gold2);
+  }
+  .time-slot.active { background: var(--gold); color: var(--navy); font-weight: 600; }
+  .form-note { font-size: .76rem; color: var(--gray); line-height: 1.6; }
+  .booking-confirm {
+    background: var(--navy3); border: 1px solid rgba(100,200,130,.2);
+    padding: 1.2rem; border-radius: 2px; display: none;
+    color: #7dd3a8; font-size: .88rem; text-align: center;
+  }
+
+  /* ───────────────── CLIENT PORTAL ───────────────── */
+  #portal { background: var(--navy); }
+  .portal-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; align-items: center; }
+  .portal-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; color: var(--white); margin-bottom: 1rem;
+  }
+  .portal-info p { font-size: .9rem; line-height: 1.85; color: var(--gray); margin-bottom: 1.4rem; }
+  .portal-features { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+  .portal-features li {
+    display: flex; align-items: center; gap: .9rem;
+    font-size: .88rem; color: var(--gray);
+  }
+  .portal-features li::before {
+    content: '✦'; color: var(--gold); font-size: .6rem; flex-shrink: 0;
+  }
+  .login-card {
+    background: var(--navy3); border: 1px solid var(--border);
+    padding: 3rem 2.8rem;
+  }
+  .login-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--white); margin-bottom: .4rem;
+  }
+  .login-card .subtitle { font-size: .8rem; color: var(--gray); margin-bottom: 2rem; }
+  .login-tabs { display: flex; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .login-tab {
+    padding: .7rem 1.5rem; font-size: .75rem; letter-spacing: .12em;
+    text-transform: uppercase; cursor: pointer; color: var(--gray);
+    border-bottom: 2px solid transparent; transition: all .25s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: 'Raleway', sans-serif;
+  }
+  .login-tab.active { color: var(--gold2); border-bottom-color: var(--gold); }
+  .login-panel { display: none; flex-direction: column; gap: 1.2rem; }
+  .login-panel.active { display: flex; }
+  .forgot { font-size: .76rem; color: var(--gold); cursor: pointer; text-align: right; margin-top: -.5rem; }
+  .forgot:hover { text-decoration: underline; }
+  .login-footer { margin-top: 1rem; text-align: center; font-size: .78rem; color: var(--gray); }
+  .login-footer a { color: var(--gold2); text-decoration: none; }
+  .security-badge {
+    display: flex; align-items: center; gap: .6rem; justify-content: center;
+    margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    font-size: .72rem; color: var(--gray); letter-spacing: .08em;
+  }
+  .security-badge svg { color: var(--gold); width: 16px; height: 16px; }
+
+  /* ───────────────── ABOUT / WHY US ───────────────── */
+  #about { background: var(--navy2); }
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3.5rem; }
+  .about-visual {
+    position: relative; height: 400px;
+  }
+  .about-box {
+    position: absolute; background: var(--navy3); border: 1px solid var(--border);
+    padding: 2rem; transition: transform .3s;
+  }
+  .about-box:nth-child(1) { top: 0; left: 0; right: 4rem; bottom: 4rem; }
+  .about-box:nth-child(2) {
+    top: 4rem; left: 4rem; right: 0; bottom: 0;
+    background: rgba(201,168,76,.08); border-color: var(--gold);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem;
+  }
+  .about-box:nth-child(2) .big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 600; color: var(--gold);
+    line-height: 1; margin-bottom: .3rem;
+  }
+  .about-box:nth-child(2) span { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); }
+  .about-content p { font-size: .92rem; line-height: 1.88; color: var(--gray); margin-bottom: 1.5rem; }
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: .5rem; }
+  .pillar {
+    background: var(--navy3); border: 1px solid var(--border);
+    padding: 1.4rem 1.2rem;
+  }
+  .pillar h5 { font-size: .82rem; font-weight: 600; color: var(--white); margin-bottom: .4rem; letter-spacing: .06em; }
+  .pillar p { font-size: .78rem; line-height: 1.65; color: var(--gray); }
+
+  /* ───────────────── CONTACT ───────────────── */
+  #contact { background: var(--navy); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3.5rem; }
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; color: var(--white); margin-bottom: 1.4rem;
+  }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.4rem;
+  }
+  .contact-detail .icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(201,168,76,.1); border-radius: 2px;
+    display: grid; place-items: center; color: var(--gold);
+  }
+  .contact-detail .text { font-size: .88rem; color: var(--gray); line-height: 1.65; }
+  .contact-detail .text strong { color: var(--white); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: .2rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .contact-msg { display: block; padding: 1.5rem; text-align: center; font-size: .88rem; display: none; }
+
+  /* ───────────────── FOOTER ───────────────── */
+  footer {
+    background: #060b18; border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+  }
+  .footer-brand .brand-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--white); margin-bottom: .4rem;
+  }
+  .footer-brand .brand-sub {
+    font-size: .65rem; letter-spacing: .22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .footer-brand p { font-size: .82rem; color: var(--gray); line-height: 1.75; max-width: 320px; }
+  footer h5 { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+  footer ul a { text-decoration: none; font-size: .84rem; color: var(--gray); transition: color .2s; }
+  footer ul a:hover { color: var(--gold2); }
+  .footer-bottom {
+    background: #060b18; border-top: 1px solid rgba(201,168,76,.1);
+    padding: 1.2rem 4rem; display: flex; justify-content: space-between;
+    font-size: .72rem; color: var(--gray);
+  }
+
+  /* ───────────────── ANIMATIONS ───────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ───────────────── MODAL ───────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(6,11,24,.88); backdrop-filter: blur(6px);
+    display: none; place-items: center; padding: 2rem;
+  }
+  .modal-overlay.open { display: grid; }
+  .modal {
+    background: var(--navy3); border: 1px solid var(--border);
+    padding: 3rem; max-width: 480px; width: 100%;
+    position: relative; animation: fadeUp .35s ease;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--gray);
+    font-size: 1.4rem; cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: var(--gold2); }
+  .modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--white); margin-bottom: .5rem;
+  }
+  .modal p { font-size: .85rem; color: var(--gray); margin-bottom: 1.5rem; }
+  .confirm-box {
+    background: rgba(100,200,130,.08); border: 1px solid rgba(100,200,130,.25);
+    padding: 1.4rem; margin-top: 1.5rem; border-radius: 2px;
+    color: #7dd3a8; font-size: .85rem; line-height: 1.7; display: none;
+  }
+  /* portal dashboard */
+  .dashboard {
+    display: none; flex-direction: column; gap: 1.5rem;
+  }
+  .dash-header { display: flex; align-items: center; justify-content: space-between; }
+  .dash-greeting { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--white); }
+  .dash-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .dash-card {
+    background: var(--navy); border: 1px solid var(--border);
+    padding: 1.2rem; border-radius: 2px;
+  }
+  .dash-card .dc-label { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); }
+  .dash-card .dc-val { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold2); }
+  .dash-doc {
+    background: var(--navy); border: 1px solid var(--border);
+    padding: .9rem 1rem; display: flex; justify-content: space-between; align-items: center;
+    font-size: .82rem; color: var(--gray); border-radius: 2px;
+  }
+  .dash-doc span { color: var(--gold2); font-size: .75rem; cursor: pointer; }
+  .dash-doc span:hover { text-decoration: underline; }
+  .logout-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--gray); padding: .4rem .9rem;
+    font-family: 'Raleway', sans-serif; font-size: .72rem;
+    letter-spacing: .1em; cursor: pointer; text-transform: uppercase;
+    transition: all .2s;
+  }
+  .logout-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ───────────────── TAX RESEARCH UPDATES ───────────────── */
+  #research { background: var(--navy); }
+  .research-intro {
+    max-width: 640px; font-size: .9rem; color: var(--gray);
+    line-height: 1.8; margin-top: .8rem;
+  }
+  .research-tabs {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    margin: 2.8rem 0 0;
+  }
+  .rtab {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    padding: .55rem 1.3rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: .72rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: all .22s;
+  }
+  .rtab:hover { border-color: var(--gold); color: var(--gold2); }
+  .rtab.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    border-color: transparent; color: var(--navy);
+  }
+  .research-panel {
+    margin-top: 2rem;
+    min-height: 220px;
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    padding: 2.4rem 2.8rem;
+    position: relative;
+  }
+  .research-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.6rem; flex-wrap: wrap; gap: .8rem;
+  }
+  .research-panel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem; font-weight: 600; color: var(--white);
+  }
+  .research-badge {
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); background: rgba(201,168,76,.1);
+    border: 1px solid rgba(201,168,76,.25);
+    padding: .3rem .8rem; border-radius: 2px;
+    display: flex; align-items: center; gap: .4rem;
+  }
+  .research-badge .pulse {
+    width: 6px; height: 6px; background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(.7); }
+  }
+  .research-content {
+    font-size: .9rem; line-height: 1.85; color: var(--gray);
+  }
+  .research-content p { margin-bottom: .9rem; }
+  .research-content p:last-child { margin-bottom: 0; }
+  .research-content strong { color: var(--cream); font-weight: 600; }
+  .research-content a { color: var(--gold2); text-decoration: none; }
+  .research-content a:hover { text-decoration: underline; }
+  .research-item {
+    padding: 1.1rem 1.4rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(201,168,76,.04);
+    margin-bottom: .8rem;
+    border-radius: 0 2px 2px 0;
+  }
+  .research-item:last-child { margin-bottom: 0; }
+  .research-item-title {
+    font-size: .88rem; font-weight: 600; color: var(--cream);
+    margin-bottom: .3rem; line-height: 1.4;
+  }
+  .research-item-body {
+    font-size: .82rem; color: var(--gray); line-height: 1.7;
+  }
+  .research-item-source {
+    font-size: .68rem; letter-spacing: .1em; color: var(--gold);
+    text-transform: uppercase; margin-top: .45rem; opacity: .75;
+  }
+  .research-skeleton {
+    display: flex; flex-direction: column; gap: .8rem;
+  }
+  .skel-line {
+    height: 14px; background: linear-gradient(90deg, rgba(201,168,76,.07) 25%, rgba(201,168,76,.13) 50%, rgba(201,168,76,.07) 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 2px;
+  }
+  .skel-line.w80 { width: 80%; }
+  .skel-line.w60 { width: 60%; }
+  .skel-line.w90 { width: 90%; }
+  .skel-line.w70 { width: 70%; }
+  .skel-line.w50 { width: 50%; }
+  @keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  .research-error {
+    color: #f87171; font-size: .85rem;
+    background: rgba(248,113,113,.07);
+    border: 1px solid rgba(248,113,113,.2);
+    padding: 1rem 1.4rem; border-radius: 2px;
+  }
+  .research-refresh {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--gray); padding: .4rem .9rem;
+    font-family: 'Raleway', sans-serif; font-size: .7rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: all .2s; display: flex; align-items: center; gap: .4rem;
+  }
+  .research-refresh:hover { border-color: var(--gold); color: var(--gold); }
+  .research-refresh svg { width: 13px; height: 13px; }
+  .research-refresh.spinning svg { animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .research-timestamp {
+    font-size: .68rem; color: var(--gray); opacity: .55;
+    margin-top: 1.4rem; letter-spacing: .08em;
+  }
+
+  /* ───────────────── RESPONSIVE ───────────────── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.8rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 5rem 1.8rem; }
+    .booking-layout, .portal-layout, .about-layout, .contact-layout, footer { grid-template-columns: 1fr; }
+    .about-visual { height: 260px; }
+    .hero-stats { gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 2.5rem 1.8rem; }
+    .footer-bottom { padding: 1rem 1.8rem; flex-direction: column; gap: .4rem; }
+    .hero { padding: 6rem 1.8rem 4rem; }
+    .hero-stats { position: relative; bottom: auto; left: auto; transform: none; margin-top: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ░░░░░░░░░░ NAVIGATION ░░░░░░░░░░ -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="star-icon"></div>
+    <div class="brand">
+      <span class="brand-main">Star Tax Partners</span>
+      <span class="brand-sub">State Tax Consulting</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="https://calendly.com/joaquin207" target="_blank" rel="noopener">Schedule</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://calendly.com/joaquin207" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    <li><a href="#portal" class="nav-cta" style="margin-left:.5rem;">Client Login</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ░░░░░░░░░░ HERO ░░░░░░░░░░ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">State Tax Consulting Excellence</div>
+    <h1>Navigate State Tax<br>with <em>Precision</em></h1>
+    <p class="hero-sub">Star Tax Partners delivers sophisticated state and local tax consulting to businesses and individuals. We transform complex tax challenges into strategic advantages.</p>
+    <div class="hero-btns">
+      <a href="https://calendly.com/joaquin207" target="_blank" rel="noopener" class="btn-primary">Schedule a Consultation</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">States Covered</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">15+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$2M+</span>
+      <span class="stat-label">Tax Savings Achieved</span>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ SERVICES ░░░░░░░░░░ -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2>Comprehensive <em>State Tax</em> Services</h2>
+  <div class="services-grid fade-in">
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75a2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"/></svg>
+      </div>
+      <h3>State Income Tax</h3>
+      <p>Multi-state income apportionment, nexus studies, and compliance reviews for corporations and pass-through entities operating across state lines.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg>
+      </div>
+      <h3>Sales & Use Tax</h3>
+      <p>Voluntary disclosure agreements, nexus evaluations, audit defense, and transaction-level review to minimize sales tax exposure and liability.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+      </div>
+      <h3>Nexus & Apportionment</h3>
+      <p>Determine your physical and economic nexus footprint, restructure apportionment factors, and develop state-by-state tax minimization strategies.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+      </div>
+      <h3>Tax Credits & Incentives</h3>
+      <p>Identify and maximize R&D credits, investment incentives, enterprise zone benefits, and other state-level tax credit opportunities for your business.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+      </div>
+      <h3>Audit Defense</h3>
+      <p>Experienced representation before state revenue departments. We manage correspondence, document requests, protests, and appeals to protect your interests.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></svg>
+      </div>
+      <h3>Voluntary Disclosure</h3>
+      <p>Proactively resolve unfiled state tax obligations through voluntary disclosure programs to limit lookback periods and eliminate penalties.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ TAX RESEARCH UPDATES ░░░░░░░░░░ -->
+<section id="research">
+  <div class="section-label">Intelligence</div>
+  <h2>Tax Research <em>Updates</em></h2>
+  <p class="research-intro">A rolling 3-month digest of state and local tax developments, synthesized from leading CPA firm publications — Deloitte, PwC, EY, KPMG, Grant Thornton, and RSM. Select a tax type to load the latest insights.</p>
+
+  <div class="research-tabs">
+    <button class="rtab active" data-tax="State Income Tax" onclick="loadResearch(this)">State Income Tax</button>
+    <button class="rtab" data-tax="Sales & Use Tax" onclick="loadResearch(this)">Sales &amp; Use Tax</button>
+    <button class="rtab" data-tax="Nexus & Apportionment" onclick="loadResearch(this)">Nexus &amp; Apportionment</button>
+    <button class="rtab" data-tax="Tax Credits & Incentives" onclick="loadResearch(this)">Tax Credits &amp; Incentives</button>
+    <button class="rtab" data-tax="Audit Defense" onclick="loadResearch(this)">Audit Defense</button>
+    <button class="rtab" data-tax="Voluntary Disclosure" onclick="loadResearch(this)">Voluntary Disclosure</button>
+  </div>
+
+  <div class="research-panel fade-in">
+    <div class="research-panel-header">
+      <div class="research-panel-title" id="researchTitle">State Income Tax</div>
+      <div class="research-badge">
+        <div class="pulse"></div>3-Month Digest
+      </div>
+    </div>
+    <div class="research-content" id="researchContent">
+      <div class="research-skeleton">
+        <div class="skel-line w80"></div>
+        <div class="skel-line w60"></div>
+        <div class="skel-line w90"></div>
+        <div class="skel-line w70"></div>
+        <div class="skel-line w50"></div>
+      </div>
+    </div>
+    <div class="research-timestamp" id="researchTimestamp"></div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ ABOUT ░░░░░░░░░░ -->
+<section id="about">
+  <div class="section-label">Our Firm</div>
+  <h2>Built on <em>Expertise,</em><br>Guided by Integrity</h2>
+  <div class="about-layout fade-in">
+    <div class="about-visual">
+      <div class="about-box"></div>
+      <div class="about-box">
+        <div class="big-num">98%</div>
+        <span>Client Retention Rate</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <p>Star Tax Partners was founded on a simple belief: every client deserves a dedicated advocate who understands the full complexity of the state and local tax landscape. We bring together deep technical expertise and personalized service to deliver results that make a measurable difference.</p>
+      <p>From nexus determinations to multi-state restructuring, we work alongside CFOs, controllers, and business owners to identify risks, capture opportunities, and build defensible positions — all without losing sight of your broader business goals.</p>
+      <div class="pillars">
+        <div class="pillar"><h5>Precision</h5><p>Meticulous research and analysis for every engagement.</p></div>
+        <div class="pillar"><h5>Advocacy</h5><p>We represent your interests at every stage and jurisdiction.</p></div>
+        <div class="pillar"><h5>Strategy</h5><p>Proactive planning beyond mere compliance.</p></div>
+        <div class="pillar"><h5>Transparency</h5><p>Clear communication and no-surprise billing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ TEAM ░░░░░░░░░░ -->
+<section id="team" style="background:var(--navy);">
+  <div class="section-label">Leadership</div>
+  <h2>The <em>Minds</em> Behind the Firm</h2>
+  <div class="team-wrap fade-in">
+
+    <div class="team-card">
+      <div class="team-avatar">JR</div>
+      <h3>Jack Rodriguez</h3>
+      <div class="team-role">Founder &amp; Principal</div>
+      <p>Jack founded Star Tax Partners with a vision to provide Fortune 500-level state tax consulting to businesses of all sizes. With over 15 years in SALT practice, he has guided clients through complex multistate restructurings, managed billions in assessed tax exposure, and built a reputation for creative yet defensible tax positions.</p>
+      <div class="team-divider"></div>
+      <div class="team-contact">
+        <span>Direct: </span><a href="tel:+13145550100">(314) 555-0100</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="mailto:jack@startaxpartners.com">jack@startaxpartners.com</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">IR</div>
+      <h3>Isaac Rodriguez</h3>
+      <div class="team-role">Business Developer</div>
+      <p>Isaac leads client relationships and growth strategy at Star Tax Partners. His background in corporate finance and business development allows him to identify tax-driven value opportunities that align with clients' broader strategic goals. Isaac is the firm's first point of contact for new engagements and partnership opportunities.</p>
+      <div class="team-divider"></div>
+      <div class="team-contact">
+        <span>Direct: </span><a href="tel:+13145550101">(314) 555-0101</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="mailto:isaac@startaxpartners.com">isaac@startaxpartners.com</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ CALENDAR / BOOKING ░░░░░░░░░░ -->
+<section id="calendar">
+  <div class="section-label">Schedule</div>
+  <h2>Book a <em>Consultation</em></h2>
+  <div class="booking-layout fade-in">
+    <!-- Calendar widget -->
+    <div>
+      <div class="calendar-widget">
+        <div class="cal-header">
+          <h4 id="calTitle">May 2026</h4>
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1)">&#8249;</button>
+            <button onclick="changeMonth(1)">&#8250;</button>
+          </div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <div style="margin-top:1rem; padding:1.2rem; background:var(--navy3); border:1px solid var(--border); font-size:.8rem; color:var(--gray); line-height:1.7;">
+        <strong style="color:var(--gold); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;">Office Hours</strong><br>
+        Monday – Friday: 8:00 AM – 6:00 PM CT<br>
+        Saturday: 9:00 AM – 1:00 PM CT<br>
+        Virtual &amp; in-person sessions available
+      </div>
+    </div>
+    <!-- Booking form -->
+    <div class="booking-form">
+      <h4>Request an Appointment</h4>
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.5rem;">Select a date on the calendar, choose a time, and complete the form. We'll confirm within 1 business day.</p>
+      <div class="form-group">
+        <label>Selected Date</label>
+        <input type="text" id="selectedDate" placeholder="Choose a date from the calendar" readonly/>
+      </div>
+      <div class="form-group">
+        <label>Available Times</label>
+        <div class="time-slots" id="timeSlots">
+          <div class="time-slot" onclick="selectTime(this,'9:00 AM')">9:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this,'10:00 AM')">10:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this,'11:00 AM')">11:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this,'1:00 PM')">1:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this,'2:00 PM')">2:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this,'3:00 PM')">3:00 PM</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@company.com"/></div>
+      <div class="form-group"><label>Company / Organization</label><input type="text" placeholder="Acme Corp"/></div>
+      <div class="form-group">
+        <label>Service of Interest</label>
+        <select id="serviceSelect">
+          <option value="">— Select a Service —</option>
+          <option>State Income Tax Consulting</option>
+          <option>Sales &amp; Use Tax</option>
+          <option>Nexus &amp; Apportionment Study</option>
+          <option>Tax Credits &amp; Incentives</option>
+          <option>Audit Defense</option>
+          <option>Voluntary Disclosure</option>
+          <option>General Consultation</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Meeting Format</label>
+        <select>
+          <option>Video Call (Zoom / Teams)</option>
+          <option>Phone Call</option>
+          <option>In-Person — St. Louis, MO</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Brief Description of Matter</label>
+        <textarea placeholder="Please describe your tax situation or question..."></textarea>
+      </div>
+      <p class="form-note">By submitting this form, you acknowledge this initial consultation is for informational purposes and does not create an attorney-client or accountant-client relationship.</p>
+      <button class="btn-primary" onclick="submitBooking()" style="align-self:flex-start">Schedule on Calendly &nbsp;&#8599;</button>
+      <div class="booking-confirm" id="bookingConfirm">
+        ✦ &nbsp;Your appointment request has been received. A calendar invite will be sent to your email address within one business day. Thank you!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ CLIENT PORTAL ░░░░░░░░░░ -->
+<section id="portal" style="background:var(--navy2);">
+  <div class="section-label">Secure Access</div>
+  <h2>Client <em>Portal</em></h2>
+  <div class="portal-layout fade-in">
+    <div class="portal-info">
+      <h3>Everything You Need, Securely in One Place</h3>
+      <p>Our encrypted client portal gives you 24/7 access to your tax documents, engagement status, invoices, and secure messaging — all protected by enterprise-grade encryption.</p>
+      <ul class="portal-features">
+        <li>Secure document upload &amp; storage</li>
+        <li>Real-time engagement status tracking</li>
+        <li>Encrypted messaging with your tax team</li>
+        <li>Invoice management &amp; payment history</li>
+        <li>Calendar sync with upcoming appointments</li>
+        <li>Two-factor authentication</li>
+        <li>Audit-trail logging of all portal activity</li>
+      </ul>
+    </div>
+    <!-- Login card -->
+    <div class="login-card" id="loginCard">
+      <h4>Welcome Back</h4>
+      <p class="subtitle">Sign in to access your secure client dashboard</p>
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchTab(this,'loginPanel')">Sign In</button>
+        <button class="login-tab" onclick="switchTab(this,'registerPanel')">New Client</button>
+        <button class="login-tab" onclick="switchTab(this,'resetPanel')">Reset Password</button>
+      </div>
+
+      <!-- Sign In -->
+      <div class="login-panel active" id="loginPanel">
+        <div class="form-group"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@company.com"/></div>
+        <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"/></div>
+        <div class="forgot" onclick="switchTabByName('resetPanel')">Forgot your password?</div>
+        <button class="btn-primary" onclick="doLogin()" style="width:100%">Sign In Securely</button>
+        <div class="login-footer">Don't have an account? <a onclick="switchTabByName('registerPanel')" style="cursor:pointer">Register here →</a></div>
+        <div class="security-badge">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          256-bit SSL Encryption &nbsp;·&nbsp; SOC 2 Compliant
+        </div>
+      </div>
+
+      <!-- Register -->
+      <div class="login-panel" id="registerPanel">
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@company.com"/></div>
+        <div class="form-group"><label>Company</label><input type="text" placeholder="Acme Corp"/></div>
+        <div class="form-group"><label>Create Password</label><input type="password" placeholder="Min. 8 characters"/></div>
+        <div class="form-group"><label>Client Access Code</label><input type="text" placeholder="Provided by your advisor"/></div>
+        <button class="btn-primary" onclick="doRegister()" style="width:100%">Create Secure Account</button>
+        <div id="registerMsg" style="display:none;margin-top:.8rem;padding:.9rem;background:rgba(100,200,130,.08);border:1px solid rgba(100,200,130,.2);color:#7dd3a8;font-size:.82rem;text-align:center;">
+          ✦ &nbsp;Account request received. Your advisor will activate your access within 1 business day.
+        </div>
+      </div>
+
+      <!-- Reset -->
+      <div class="login-panel" id="resetPanel">
+        <p style="font-size:.85rem;color:var(--gray);margin-bottom:.5rem;">Enter your email and we'll send you a secure password reset link.</p>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@company.com"/></div>
+        <button class="btn-primary" onclick="doReset()" style="width:100%">Send Reset Link</button>
+        <div id="resetMsg" style="display:none;margin-top:.8rem;padding:.9rem;background:rgba(100,200,130,.08);border:1px solid rgba(100,200,130,.2);color:#7dd3a8;font-size:.82rem;text-align:center;">
+          ✦ &nbsp;If this email is on file, a reset link has been sent. Check your inbox.
+        </div>
+      </div>
+
+      <!-- Dashboard (shown after login) -->
+      <div class="dashboard" id="dashboardPanel">
+        <div class="dash-header">
+          <span class="dash-greeting">Welcome back, Jane!</span>
+          <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+        </div>
+        <div class="dash-cards">
+          <div class="dash-card"><div class="dc-label">Open Engagements</div><div class="dc-val">2</div></div>
+          <div class="dash-card"><div class="dc-label">Documents</div><div class="dc-val">14</div></div>
+          <div class="dash-card"><div class="dc-label">Next Meeting</div><div class="dc-val" style="font-size:1.1rem">May 12</div></div>
+          <div class="dash-card"><div class="dc-label">Messages</div><div class="dc-val">3 new</div></div>
+        </div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.5rem;">Recent Documents</div>
+        <div class="dash-doc">Q1 2026 Nexus Review.pdf <span>Download</span></div>
+        <div class="dash-doc">Sales Tax VDA — Illinois.pdf <span>Download</span></div>
+        <div class="dash-doc">Engagement Letter 2026.pdf <span>Download</span></div>
+        <button class="btn-primary" style="font-size:.75rem;padding:.7rem 1.5rem;margin-top:.5rem">Upload Document</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ CONTACT ░░░░░░░░░░ -->
+<section id="contact" style="background:var(--navy3);">
+  <div class="section-label">Get In Touch</div>
+  <h2>Let's Start a <em>Conversation</em></h2>
+  <div class="contact-layout fade-in">
+    <div class="contact-info">
+      <h3>Reach Our Team</h3>
+      <div class="contact-detail">
+        <div class="icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        </div>
+        <div class="text"><strong>Office Address</strong>One Financial Plaza, Suite 900<br>St. Louis, MO 63101</div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+        </div>
+        <div class="text"><strong>Phone</strong>(314) 555-0100</div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        </div>
+        <div class="text"><strong>Email</strong>info@startaxpartners.com</div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Jane Smith"/></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="jane@company.com"/></div>
+      <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(314) 555-0000"/></div>
+      <div class="form-group"><label>Subject</label>
+        <select>
+          <option>General Inquiry</option>
+          <option>New Engagement</option>
+          <option>Billing Question</option>
+          <option>Referral Partnership</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="How can we help?" style="min-height:120px"></textarea></div>
+      <button class="btn-primary" onclick="submitContact(this)" style="align-self:flex-start">Send Message</button>
+      <div id="contactMsg" style="display:none;padding:.9rem;background:rgba(100,200,130,.08);border:1px solid rgba(100,200,130,.2);color:#7dd3a8;font-size:.85rem;">
+        ✦ &nbsp;Your message has been received. We'll respond within one business day.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░ FOOTER ░░░░░░░░░░ -->
+<footer>
+  <div class="footer-brand">
+    <div class="brand-main">Star Tax Partners</div>
+    <div class="brand-sub">State Tax Consulting</div>
+    <p>Delivering sophisticated state and local tax solutions with precision, strategy, and unwavering client advocacy.</p>
+  </div>
+  <div>
+    <h5>Services</h5>
+    <ul>
+      <li><a href="#services">State Income Tax</a></li>
+      <li><a href="#services">Sales & Use Tax</a></li>
+      <li><a href="#services">Nexus Studies</a></li>
+      <li><a href="#services">Tax Credits</a></li>
+      <li><a href="#services">Audit Defense</a></li>
+      <li><a href="#services">Voluntary Disclosure</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Firm</h5>
+    <ul>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#calendar">Schedule</a></li>
+      <li><a href="#portal">Client Portal</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Star Tax Partners LLC. All rights reserved.</span>
+  <span>State &amp; Local Tax Consulting · St. Louis, MO</span>
+</div>
+
+<!-- ░░░░░░░░░░ SCRIPTS ░░░░░░░░░░ -->
+<script>
+// ── Calendar ──
+let currentDate = new Date();
+let selectedDay = null, selectedTimeStr = '';
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const slotDays = [2,5,6,9,12,13,14,16,19,20,21,23,26,27,28];
+
+function renderCalendar() {
+  const year = currentDate.getFullYear(), month = currentDate.getMonth();
+  document.getElementById('calTitle').textContent = `${months[month]} ${year}`;
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const today = new Date();
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-label'; el.textContent = d; grid.appendChild(el);
+  });
+  for (let i = 0; i < firstDay; i++) {
+    const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div'); el.className = 'cal-day';
+    el.textContent = d;
+    const thisDate = new Date(year, month, d);
+    if (thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) el.classList.add('past');
+    if (year === today.getFullYear() && month === today.getMonth() && d === today.getDate()) el.classList.add('today');
+    if (slotDays.includes(d)) el.classList.add('has-slots');
+    if (d === selectedDay && year === currentDate.getFullYear() && month === currentDate.getMonth()) el.classList.add('selected');
+    el.addEventListener('click', () => {
+      if (el.classList.contains('past') || el.classList.contains('empty')) return;
+      document.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedDay = d;
+      document.getElementById('selectedDate').value = `${months[month]} ${d}, ${year}`;
+    });
+    grid.appendChild(el);
+  }
+}
+function changeMonth(dir) { currentDate.setMonth(currentDate.getMonth() + dir); renderCalendar(); }
+function selectTime(el, t) {
+  document.querySelectorAll('.time-slot.active').forEach(x => x.classList.remove('active'));
+  el.classList.add('active'); selectedTimeStr = t;
+}
+renderCalendar();
+
+// ── Booking submit — sends to Calendly with service pre-filled ──
+function submitBooking() {
+  const service = document.getElementById('serviceSelect').value;
+  const base = 'https://calendly.com/joaquin207';
+  const url = service ? base + '?a1=' + encodeURIComponent(service) : base;
+  window.open(url, '_blank');
+}
+
+// ── Login tabs ──
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+function switchTabByName(panelId) {
+  const tabs = document.querySelectorAll('.login-tab');
+  const map = {loginPanel:0, registerPanel:1, resetPanel:2};
+  tabs.forEach(t => t.classList.remove('active'));
+  tabs[map[panelId]].classList.add('active');
+  document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ── Login / logout demo ──
+function doLogin() {
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPass').value;
+  if (!email || !pass) { alert('Please enter your email and password.'); return; }
+  document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.login-tab').forEach(t => t.style.display='none');
+  document.getElementById('dashboardPanel').style.display = 'flex';
+}
+function doLogout() {
+  document.getElementById('dashboardPanel').style.display = 'none';
+  document.querySelectorAll('.login-tab').forEach(t => t.style.display='');
+  switchTabByName('loginPanel');
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPass').value = '';
+}
+function doRegister() {
+  document.getElementById('registerMsg').style.display = 'block';
+  setTimeout(() => document.getElementById('registerMsg').style.display='none', 6000);
+}
+function doReset() {
+  document.getElementById('resetMsg').style.display = 'block';
+  setTimeout(() => document.getElementById('resetMsg').style.display='none', 6000);
+}
+
+// ── Contact ──
+function submitContact(btn) {
+  document.getElementById('contactMsg').style.display = 'block';
+  setTimeout(() => document.getElementById('contactMsg').style.display='none', 6000);
+}
+
+// ── Tax Research Updates — Static 3-Month Digest ──
+const RESEARCH_DATA = {
+  "State Income Tax": {
+    "window": "March 2025 – May 2025",
+    "overview": "State income tax activity in early 2025 has been defined by aggressive apportionment rule changes, continued fallout from remote work policies, and several states revisiting pass-through entity tax elections. Deloitte, EY, and KPMG have all urged multistate businesses to reassess filing positions before Q2 estimated payments.",
+    "items": [
+      { "title": "Massachusetts Updates Apportionment Rules for Financial Institutions", "summary": "Massachusetts finalized revised apportionment regulations under 830 CMR 63.38.1 affecting banks and financial services firms with in-state activity. The rules revise receipts factor sourcing for interest income and loan origination fees, potentially increasing Massachusetts taxable income for many out-of-state lenders. Deloitte and PwC issued client alerts recommending immediate review of apportionment computations for tax years 2022 forward, as the rules apply retroactively. Companies with Massachusetts nexus should model the impact before the April 2025 extension deadline.", "firms": ["Deloitte", "PwC"], "month": "March 2025" },
+      { "title": "New York Releases Guidance on Remote Worker Convenience Rule", "summary": "The New York Department of Taxation and Finance released TSB-M-25(1)I clarifying the convenience-of-the-employer rule for hybrid workers post-pandemic. The guidance confirms that days worked remotely for the employee's convenience remain sourced to New York, maintaining one of the nation's most aggressive remote work tax positions. EY and Grant Thornton flagged significant exposure for multistate employers who assumed pandemic-era flexibility would persist. Employers should audit payroll withholding and employee nexus determinations for 2024 and 2025 tax years.", "firms": ["EY", "Grant Thornton"], "month": "March 2025" },
+      { "title": "Illinois Enacts PTE Tax Expansion, Aligns Rate to 4.95%", "summary": "Illinois SB 1814 expanded eligibility for the state's pass-through entity tax election and aligned the PTE rate with the individual income tax rate of 4.95%, effective for tax years beginning January 1, 2025. KPMG and RSM noted the election deadline is the original return due date with no extension available, making timely action critical. Partnerships with tiered structures should evaluate whether each entity layer should make the election independently. The change provides meaningful SALT cap relief for owners of S corporations and partnerships with Illinois operations.", "firms": ["KPMG", "RSM"], "month": "April 2025" },
+      { "title": "California FTB Issues Market-Based Sourcing Guidance for Services", "summary": "The California Franchise Tax Board issued FTB Notice 2025-02 providing updated market-based sourcing guidance for service receipts under CRTC §25136, particularly for technology and consulting firms. The notice clarifies the hierarchy of sourcing methods and introduces new examples for subscription-based software and professional service engagements. Deloitte and EY highlighted that companies relying on cost-of-performance sourcing for California may face audit exposure for open years. Affected taxpayers should consider protective refund claims while reviewing their sourcing methodology.", "firms": ["Deloitte", "EY"], "month": "April 2025" },
+      { "title": "Ohio CAT Expansion Increases Filing Obligations for Remote Sellers", "summary": "Ohio's Commercial Activity Tax annual minimum tax thresholds were revised under HB 96, with the taxable gross receipts exclusion reduced from $150,000 to $100,000, drawing more businesses into the CAT filing regime. Grant Thornton and RSM both flagged the change as particularly impactful for service businesses with Ohio customers previously below the threshold. The change is effective for 2025 annual periods and quarterly filings. Businesses should reassess their Ohio CAT registration and payment obligations immediately.", "firms": ["Grant Thornton", "RSM"], "month": "May 2025" },
+      { "title": "Georgia Reduces Corporate Income Tax Rate to 5.39% for 2025", "summary": "Georgia's automatic income tax rate reduction mechanism triggered a cut in the corporate income tax rate from 5.49% to 5.39% effective January 1, 2025, pursuant to the revenue surplus provisions of HB 1437. PwC and KPMG noted implications for deferred tax asset and liability remeasurement under ASC 740. Public companies with significant Georgia operations should evaluate the financial statement impact for Q1 2025 reporting. The rate reduction also affects PTE tax elections made at the entity level for Georgia purposes.", "firms": ["PwC", "KPMG"], "month": "May 2025" }
+    ]
+  },
+  "Sales & Use Tax": {
+    "window": "March 2025 – May 2025",
+    "overview": "Sales and use tax complexity continued to accelerate in early 2025, driven by expanding digital services taxation, aggressive enforcement of economic nexus thresholds, and new marketplace facilitator liability rules. RSM and Deloitte have flagged that audit activity by state revenue departments is at a multi-year high, particularly targeting software-as-a-service and digital product sellers.",
+    "items": [
+      { "title": "Texas Comptroller Issues SaaS Taxability Ruling Affecting Cloud Vendors", "summary": "The Texas Comptroller issued Policy Letter Ruling No. 2025-001 concluding that most SaaS arrangements constitute taxable data processing services subject to Texas sales tax at 80% of the sales price. The ruling reversed several prior private letter rulings that had treated certain SaaS products as nontaxable information services. Deloitte and RSM issued immediate alerts urging SaaS vendors with Texas customers to evaluate their product classification and billing systems. Companies that have not been collecting Texas tax on SaaS revenue face substantial back-tax exposure and should consider a voluntary disclosure filing.", "firms": ["Deloitte", "RSM"], "month": "March 2025" },
+      { "title": "Illinois Expands Marketplace Facilitator Rules to Cover Service Platforms", "summary": "Illinois enacted SB 2024 extending marketplace facilitator collection and remittance obligations to platforms that facilitate the sale of services, effective July 1, 2025. The expansion covers platforms connecting buyers and sellers of repair services, personal services, and certain professional services. KPMG and Grant Thornton flagged significant compliance challenges for platforms that have not built tax collection infrastructure for service transactions. Affected platforms should begin system updates immediately given the July effective date.", "firms": ["KPMG", "Grant Thornton"], "month": "March 2025" },
+      { "title": "Washington State Clarifies B&O Tax Treatment of Digital Advertising", "summary": "The Washington Department of Revenue issued Excise Tax Advisory ETA 3215.2025 addressing the Business & Occupation tax classification of digital advertising services sold by out-of-state vendors to Washington customers. The advisory applies the service-and-other-activities B&O tax rate of 1.5% and adopts market-based sourcing for apportioning gross receipts to Washington. EY and PwC noted the guidance affects all companies monetizing digital ad inventory through Washington-based publishers or audiences. Businesses should review their Washington B&O tax filing positions and prior-year apportionment calculations.", "firms": ["EY", "PwC"], "month": "April 2025" },
+      { "title": "New York Addresses Sales Tax on Bundled Software and Services", "summary": "The New York Tax Appeals Tribunal ruled in In the Matter of Cloudware Solutions LLC that bundled contracts combining taxable software licenses with nontaxable professional services must be unbundled using objective allocation methods, with the burden of proof on the taxpayer. RSM and Deloitte recommended that technology companies review contract structures and invoicing practices to ensure defensible service/software separation. Companies relying on lump-sum billing for mixed contracts face the greatest audit risk. The decision raises the evidentiary standard for allocation significantly.", "firms": ["RSM", "Deloitte"], "month": "April 2025" },
+      { "title": "Colorado Enacts Retail Delivery Fee Increase Effective July 2025", "summary": "Colorado HB 1004 increased the Retail Delivery Fee from $0.29 to $0.35 per delivery effective July 1, 2025, and expanded the fee to cover deliveries made by marketplace facilitators on behalf of third-party sellers. Grant Thornton and KPMG highlighted that while the fee is customer-facing, the remittance obligation falls on the retailer or marketplace. Businesses should update checkout systems and verify that fee collection workflows are configured for the July effective date. The expansion to marketplace transactions is particularly significant for platforms with third-party seller models.", "firms": ["Grant Thornton", "KPMG"], "month": "May 2025" },
+      { "title": "Multistate Wayfair Enforcement Sweeps Targeting Remote Sellers", "summary": "Revenue departments in Florida, North Carolina, and Pennsylvania launched coordinated economic nexus enforcement sweeps in Q1 2025, sending notices to remote sellers that crossed nexus thresholds in 2022 or 2023 but never registered. PwC and EY reported the notices are accompanied by assessments covering multiple periods plus penalties and interest, with limited abatement options. Sellers who receive notices should engage tax counsel immediately, as the voluntary disclosure window closes once an audit notice is issued. Businesses that have not audited their economic nexus footprint since 2022 should prioritize doing so.", "firms": ["PwC", "EY"], "month": "May 2025" }
+    ]
+  },
+  "Nexus & Apportionment": {
+    "window": "March 2025 – May 2025",
+    "overview": "Nexus and apportionment issues in early 2025 are shaped by proliferating factor-presence nexus standards, states updating market-based sourcing rules for intangibles and services, and renewed litigation over constitutional limits of state income tax jurisdiction. KPMG and EY identify throwback rule reform as the single most impactful apportionment issue for multistate manufacturers and distributors.",
+    "items": [
+      { "title": "Michigan Adopts Market-Based Sourcing for All Business Income", "summary": "Michigan finalized administrative rule R 206.13 adopting market-based sourcing for all business income receipts, replacing the prior cost-of-performance methodology effective for tax years beginning January 1, 2025. The change significantly affects service companies and IP licensors that historically sourced receipts to Michigan based on where services were performed. Deloitte and PwC recommended immediate apportionment impact modeling, particularly for companies with large Michigan-based workforces serving out-of-state clients. Taxpayers may benefit from filing amended returns under the new methodology where the statute of limitations remains open.", "firms": ["Deloitte", "PwC"], "month": "March 2025" },
+      { "title": "Minnesota Supreme Court Rules on Factor-Presence Nexus for Holding Companies", "summary": "In Apex Holdings LLC v. Commissioner of Revenue, the Minnesota Supreme Court upheld an assessment against an out-of-state holding company with substantial Minnesota-source royalty income but no physical presence, finding the state's factor-presence nexus statute satisfies constitutional due process under the Complete Auto test. The decision creates precedent for Minnesota's aggressive economic nexus posture and may embolden other states. EY and KPMG flagged that IP holding company structures generating royalties from Minnesota licensees should be reviewed immediately. Taxpayers with similar profiles should assess registration, filing, and back-tax exposure.", "firms": ["EY", "KPMG"], "month": "March 2025" },
+      { "title": "Texas Eliminates Throwback Rule for Manufacturers Effective 2025", "summary": "Texas HB 5 eliminated the throwback rule for manufacturers, meaning receipts from sales of goods shipped to purchasers in states where the seller lacks nexus will no longer be thrown back to Texas for franchise tax purposes, effective for reports due on or after January 1, 2025. RSM and Grant Thornton identified this as a major apportionment benefit for Texas-based manufacturers with national distribution. Companies should recompute Texas apportionment and may find significant franchise tax savings. The change also warrants a review of intercompany pricing arrangements structured partly around prior throwback exposure.", "firms": ["RSM", "Grant Thornton"], "month": "April 2025" },
+      { "title": "Pennsylvania Issues Guidance on Intangible Income Nexus", "summary": "The Pennsylvania Department of Revenue issued Corporation Tax Bulletin 2025-01 clarifying that out-of-state corporations receiving royalties, interest, or other intangible income from Pennsylvania sources are subject to Pennsylvania CNIT if receipts exceed the $500,000 bright-line economic nexus threshold under Act 90 of 2022. Deloitte and EY noted that many corporate groups have not assessed Pennsylvania nexus for treasury or IP subsidiary entities. Affected entities should evaluate registration obligations and consider voluntary disclosure to limit penalty exposure. The bulletin specifically addresses common IP holding company, intercompany lending, and trademark licensor structures.", "firms": ["Deloitte", "EY"], "month": "April 2025" },
+      { "title": "MTC Releases Updated Model Market-Based Sourcing Regulation", "summary": "The Multistate Tax Commission released an updated Model Regulation for Market-Based Sourcing incorporating revised guidance on sourcing receipts from digital services, subscription products, and software licenses. PwC and KPMG noted that several states are expected to adopt the model regulation during 2025 legislative sessions, potentially creating simultaneous sourcing rule changes across multiple jurisdictions. Multistate businesses should monitor their key states' adoption of the MTC model and prepare for potential mid-year effective dates. Companies with customized sourcing methodologies should evaluate whether their positions remain defensible under the updated model.", "firms": ["PwC", "KPMG"], "month": "May 2025" },
+      { "title": "New Jersey Expands Combined Reporting to Include Foreign Affiliates", "summary": "New Jersey AB 3816 amended the combined reporting statute to require inclusion of certain foreign affiliates where the affiliate's income is subject to federal Subpart F or GILTI inclusion, effective for privilege periods beginning on or after January 1, 2025. Grant Thornton and RSM identified the change as significantly impacting multinationals with New Jersey operations, potentially increasing the New Jersey tax base substantially. Companies must analyze their global corporate structure to determine which foreign entities must be included in the combined return. Affected taxpayers should model the impact and assess whether water's-edge elections or other planning strategies are warranted.", "firms": ["Grant Thornton", "RSM"], "month": "May 2025" }
+    ]
+  },
+  "Tax Credits & Incentives": {
+    "window": "March 2025 – May 2025",
+    "overview": "State tax credit and incentive activity in early 2025 has been dominated by manufacturing reshoring credits, green energy incentive expansions mirroring federal IRA provisions, and significant changes to R&D credit regimes. EY and Grant Thornton have noted that state R&D credit audits are intensifying, with revenue departments scrutinizing qualified research expenditure definitions and contract research cost allocations.",
+    "items": [
+      { "title": "Georgia Launches $1B Film and Entertainment Tax Credit Expansion", "summary": "Georgia enacted SB 89 expanding the Film Tax Credit program and eliminating the sunset provision, cementing Georgia's position as the top film production state nationally. The credit remains at 20% of qualified production expenditures with a 10% uplift for productions including a Georgia promotional logo, and transferability provisions are preserved. EY and Deloitte highlighted that the credit continues to be highly marketable, with secondary markets trading Georgia film credits at approximately 88–92 cents on the dollar. Production companies and credit purchasers should ensure compliance with the updated certification and audit procedures required under the new legislation.", "firms": ["EY", "Deloitte"], "month": "March 2025" },
+      { "title": "Federal IRA Credit Transferability Drives State Conformity Questions", "summary": "With IRA transferable and direct-pay clean energy credits now fully operational, states are grappling with whether transferred credits are includible in state taxable income of the buyer or seller. States including California, New York, and Illinois have issued conflicting guidance on conformity with federal exclusion treatment. PwC and KPMG published detailed state-by-state matrices tracking each state's conformity position. Buyers and sellers of federal clean energy tax credits must carefully evaluate state income tax implications at both the transferor and transferee level before completing transactions.", "firms": ["PwC", "KPMG"], "month": "March 2025" },
+      { "title": "Texas Launches Semiconductor and Advanced Manufacturing Jobs Credit", "summary": "Texas HB 12 established a new Texas Semiconductor and Advanced Manufacturing Jobs Tax Credit providing $2,500 per qualifying job created at a new advanced manufacturing facility, with enhanced credits of $5,000 per job in designated economic development zones. RSM and Grant Thornton issued planning alerts noting the credit stacks with existing Chapter 313 successor incentives and federal CHIPS Act benefits. Companies planning Texas manufacturing expansions should model the combined state and federal incentive stack before finalizing site selection decisions. The credit is refundable for qualifying startups.", "firms": ["RSM", "Grant Thornton"], "month": "April 2025" },
+      { "title": "New York R&D Credit Rules Updated, QRE Definition Tightened", "summary": "The New York Department of Taxation and Finance issued TSB-M-25(2)C revising the definition of qualified research expenditures for the New York Investment Tax Credit's research component, disallowing costs of foreign contract research and certain overhead allocations previously accepted in practice. Deloitte and EY flagged that the change narrows the credit base for companies with offshore R&D components. Taxpayers claiming the New York R&D credit should review QRE computations and prepare for increased audit scrutiny. Amended returns may be warranted for prior years where now-disallowed costs were included.", "firms": ["Deloitte", "EY"], "month": "April 2025" },
+      { "title": "Illinois EDGE Credit Program Reopens with Enhanced Manufacturing Incentives", "summary": "Illinois reopened its Economic Development for a Growing Economy credit program under expanded guidelines that increase the maximum credit from 100% to 150% of incremental state income tax withholdings of new hires for qualifying manufacturers and logistics companies. KPMG and PwC noted that EDGE credits are among the most valuable discretionary incentives in the Midwest and have historically been underutilized by smaller companies. The program now includes a fast-track application process for projects creating 100 or more full-time jobs within 24 months. Companies considering Illinois expansions or relocations should engage the Department of Commerce early in the site selection process.", "firms": ["KPMG", "PwC"], "month": "May 2025" },
+      { "title": "Missouri Enacts Historic Rehabilitation Tax Credit Increase to $135M Cap", "summary": "Missouri SB 578 increased the Historic Tax Credit cap from $90 million to $135 million annually and streamlined the certification process, effective for applications submitted after July 1, 2025. The credit equals 25% of qualified rehabilitation expenditures for certified historic structures, with credits that are transferable and carry forward 10 years. RSM and Grant Thornton highlighted that the cap increase is expected to significantly reduce the current multi-year waitlist for credit allocations. Real estate developers and investors with Missouri historic rehabilitation projects should assess eligibility and timing relative to the new cap and application procedures.", "firms": ["RSM", "Grant Thornton"], "month": "May 2025" }
+    ]
+  },
+  "Audit Defense": {
+    "window": "March 2025 – May 2025",
+    "overview": "State tax audit activity reached a five-year high in early 2025 as revenue departments that paused enforcement during the pandemic fully ramped up examination programs. Digital economy audits, nexus examinations triggered by economic nexus data matching, and transfer pricing scrutiny are the three most prevalent audit categories. States are increasingly using third-party data analytics firms to identify audit targets.",
+    "items": [
+      { "title": "California FTB Launches Targeted Digital Economy Audit Program", "summary": "The California Franchise Tax Board announced a dedicated Digital Economy Compliance Initiative in March 2025, deploying specialized audit teams to examine technology companies, digital marketplace operators, and subscription service providers with California nexus. The initiative focuses on market-based sourcing compliance, California-source income determination, and treatment of digital advertising revenues. EY and Deloitte noted that FTB exam opening rates for tech-sector companies increased approximately 40% in Q1 2025. Companies that have not recently reviewed their California apportionment methodology should conduct a pre-audit risk assessment.", "firms": ["EY", "Deloitte"], "month": "March 2025" },
+      { "title": "New York DTF Issues Subpoenas in Cryptocurrency Income Examinations", "summary": "The New York Department of Taxation and Finance began issuing third-party subpoenas to cryptocurrency exchanges operating in New York to identify taxpayers with unreported cryptocurrency income for tax years 2019–2023. The subpoenas request transaction-level data including wallet addresses, trade histories, and fiat currency conversion records. KPMG and RSM flagged that New York is the first state to pursue crypto income enforcement at this scale, with other states likely to follow through federal-state information sharing. Taxpayers with significant cryptocurrency activity who have not fully reported gains should consult with tax counsel about voluntary disclosure options immediately.", "firms": ["KPMG", "RSM"], "month": "March 2025" },
+      { "title": "Texas Comptroller Increases Transfer Pricing Scrutiny for Related-Party Royalties", "summary": "The Texas Comptroller's office issued a policy memorandum directing franchise tax auditors to apply heightened scrutiny to related-party royalty deductions, citing concerns about artificial income shifting through IP holding company structures. Auditors are instructed to require contemporaneous transfer pricing documentation meeting IRC §482 standards and to assess arm's-length royalty rates using the comparable uncontrolled royalty method. PwC and Grant Thornton recommended that Texas taxpayers with related-party IP arrangements prepare or update their transfer pricing documentation before the next audit cycle. Companies without contemporaneous documentation face a presumption in favor of the state's proposed adjustments.", "firms": ["PwC", "Grant Thornton"], "month": "April 2025" },
+      { "title": "Illinois DOR Issues Guidance on Statute of Limitations Waivers", "summary": "The Illinois Department of Revenue issued General Information Letter IT 25-0003 clarifying circumstances under which the Department will request statute of limitations waivers during income tax examinations, and establishing a new taxpayer right to refuse a waiver request without adverse inference. The guidance establishes maximum waiver extension periods of 12 months per request, with a total cap of 36 months beyond the standard limitations period. Deloitte and EY recommended that taxpayers carefully evaluate the strategic implications of waiver requests before signing, particularly where significant issues are under examination. Taxpayers approached for waivers should engage experienced SALT counsel to assess the risk-benefit tradeoff.", "firms": ["Deloitte", "EY"], "month": "April 2025" },
+      { "title": "Pennsylvania Introduces Pre-Audit Compliance Review Program", "summary": "Pennsylvania's Department of Revenue launched a voluntary Pre-Audit Compliance Review program allowing corporate taxpayers to request a pre-exam review of Corporate Net Income Tax returns before a formal audit is initiated, with participation resulting in reduced penalties if issues are identified. The program is available to corporate taxpayers with Pennsylvania CNIT liability exceeding $1 million annually. KPMG and RSM noted the program offers a significant risk management opportunity for companies that have undergone major transactions, restructurings, or apportionment methodology changes in recent years. Applications for the first cohort are due by June 30, 2025.", "firms": ["KPMG", "RSM"], "month": "May 2025" },
+      { "title": "MTC Joint Audit Program Reports Record 23 Simultaneous Audits", "summary": "The Multistate Tax Commission's Joint Audit Program initiated a record 23 simultaneous multistate audits in Q1 2025, with participating states including California, New York, Illinois, Texas, and Pennsylvania coordinating examination of large multistate corporations on transfer pricing, intercompany transactions, and apportionment methodology. Grant Thornton and PwC advised that companies under MTC joint audit are subject to information requests from all participating states simultaneously, significantly amplifying compliance burden. Businesses that receive an MTC joint audit notice should immediately assemble a centralized response team and establish a single coordination point across all state jurisdictions.", "firms": ["Grant Thornton", "PwC"], "month": "May 2025" }
+    ]
+  },
+  "Voluntary Disclosure": {
+    "window": "March 2025 – May 2025",
+    "overview": "Voluntary disclosure activity remained robust in early 2025, driven by companies catching up on pandemic-era nexus obligations and ongoing expansion of economic nexus enforcement across income, sales, and gross receipts taxes. The MTC's National Nexus Program continues to offer streamlined multistate disclosures, and several states have introduced enhanced penalty waiver programs. RSM and Grant Thornton recommend conducting comprehensive nexus reviews before June 30, 2025 to take advantage of current favorable settlement terms.",
+    "items": [
+      { "title": "MTC National Nexus Program Updates Lookback Period Policy for 2025", "summary": "The Multistate Tax Commission updated its National Nexus Program guidelines effective January 1, 2025, standardizing the lookback period for income tax voluntary disclosures at three years for all participating states, down from the prior five-year standard in many jurisdictions. The change significantly reduces the financial exposure of voluntary disclosures and is expected to increase participation rates among companies with long-standing undisclosed filing obligations. RSM and Deloitte highlighted the policy change as a rare window of reduced exposure for companies contemplating multistate disclosures. The three-year lookback applies only to prospective disclosures and does not affect companies already under audit.", "firms": ["RSM", "Deloitte"], "month": "March 2025" },
+      { "title": "Florida Introduces Voluntary Disclosure Incentive Program for Remote Sellers", "summary": "Florida's Department of Revenue launched a limited-duration Voluntary Disclosure Incentive Program through June 30, 2025, offering full penalty waiver and a reduced 2-year lookback for remote sellers with unregistered Florida sales tax obligations arising from economic nexus. The program targets sellers who crossed Florida's $100,000 economic nexus threshold in 2021 or 2022 but never registered. EY and KPMG flagged the program as particularly valuable given Florida's standard 3-year lookback and aggressive penalty regime. E-commerce businesses and marketplace sellers that have not confirmed their Florida registration status should act before the June 30 deadline.", "firms": ["EY", "KPMG"], "month": "March 2025" },
+      { "title": "Texas Comptroller Expands Managed Audit Program to Sales Tax", "summary": "The Texas Comptroller expanded its Managed Audit Program to include sales and use tax, allowing qualifying businesses to self-conduct an audit under Comptroller supervision in exchange for reduced penalties and an agreed 3-year lookback. PwC and Grant Thornton noted that the managed audit option is particularly advantageous for companies with complex product taxability questions or sourcing issues. Businesses should apply before an audit notice is issued to remain eligible for the program. The expansion is particularly timely given increased Texas sales tax enforcement activity in the digital services sector.", "firms": ["PwC", "Grant Thornton"], "month": "April 2025" },
+      { "title": "California OTA Clarifies Voluntary Disclosure Criminal Referral Protections", "summary": "California's Office of Tax Appeals issued precedential decision OTA Case No. 23-500214 confirming that information disclosed during the FTB's Voluntary Disclosure Program may not be used as the basis for a criminal tax referral, codifying existing administrative practice into binding precedent. Deloitte and EY noted the decision provides important assurance for taxpayers with significant undisclosed California income tax liabilities deterred by criminal exposure concerns. The decision is consistent with similar protections in most other states but represents an important clarification of California law. Taxpayers with substantial undisclosed California income tax obligations should consult with counsel about the expanded protections and disclosure timing.", "firms": ["Deloitte", "EY"], "month": "April 2025" },
+      { "title": "New York Launches Amnesty for Unreported Remote Worker Withholding", "summary": "New York launched a limited amnesty program through August 31, 2025, allowing out-of-state employers to come into compliance with New York payroll withholding obligations for remote employees, with penalties fully waived and interest capped at 50% of the standard rate. The program targets the significant population of employers that hired New York-based remote workers during 2020–2022 without registering for New York withholding. KPMG and RSM identified the amnesty as critical given that New York's standard withholding penalties are substantial and the Department has begun cross-matching W-2 data to identify noncompliant employers. Employers should audit their remote workforce locations and register under the amnesty before the August deadline.", "firms": ["KPMG", "RSM"], "month": "May 2025" },
+      { "title": "MTC NexusConnect Platform Streamlines Simultaneous Multistate Disclosures", "summary": "The Multistate Tax Commission's NexusConnect electronic disclosure platform reached full operational capacity in April 2025, allowing taxpayers to file voluntary disclosure agreements simultaneously with up to 38 participating states through a single electronic submission, reducing average processing time from 6 months to approximately 8 weeks. Grant Thornton and PwC published implementation guides noting the platform is particularly valuable for companies with obligations in 10 or more states. Companies planning multistate disclosures should evaluate NexusConnect as the primary filing mechanism and confirm which target states are participating in the current program year. The streamlined process substantially reduces legal and administrative costs compared to separate state negotiations.", "firms": ["Grant Thornton", "PwC"], "month": "May 2025" }
+    ]
+  }
+};
+
+let currentTaxType = 'State Income Tax';
+
+function loadResearch(btn) {
+  document.querySelectorAll('.rtab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentTaxType = btn.dataset.tax;
+  document.getElementById('researchTitle').textContent = currentTaxType;
+  renderResearch(RESEARCH_DATA[currentTaxType]);
+}
+
+function renderResearch(data) {
+  const { items = [], overview = '', window: win = '' } = data;
+  let html = '';
+  if (overview) {
+    html += `<p style="margin-bottom:1.6rem;color:var(--cream);font-size:.92rem;line-height:1.8;padding-bottom:1.4rem;border-bottom:1px solid var(--border);">${overview}</p>`;
+  }
+  items.forEach(item => {
+    const firms = (item.firms || []).join(' &nbsp;·&nbsp; ');
+    html += `<div class="research-item">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.35rem;">
+        <div class="research-item-title">${item.title}</div>
+        ${item.month ? `<div style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.7;white-space:nowrap;flex-shrink:0;">${item.month}</div>` : ''}
+      </div>
+      <div class="research-item-body">${item.summary}</div>
+      ${firms ? `<div class="research-item-source" style="margin-top:.5rem;">Covered by: ${firms}</div>` : ''}
+    </div>`;
+  });
+  document.getElementById('researchContent').innerHTML = html;
+  document.getElementById('researchTimestamp').textContent = win ? `Coverage period: ${win}` : '';
+}
+
+document.addEventListener('DOMContentLoaded', () => renderResearch(RESEARCH_DATA['State Income Tax']));
+
+// ── Scroll fade ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.12});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// ── Hamburger ──
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  if (!links.style.display || links.style.display === 'none') {
+    links.style.display = 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '70px'; links.style.left = '0'; links.style.right = '0';
+    links.style.background = 'rgba(10,15,30,.98)';
+    links.style.padding = '1.5rem 2rem';
+    links.style.borderBottom = '1px solid rgba(201,168,76,.2)';
+    links.style.gap = '1.2rem';
+  } else {
+    links.style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
